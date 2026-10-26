@@ -34,20 +34,43 @@ const prompt = require("prompt-sync")();
 //5000, 1500, 21 -> Bloqueado. limite noturno
 //5000, 800, 21 -> Pix enviado. Saldo: R$ 4200.00
 
-let saldo = Number(prompt("Qual é o seu saldo? "));
-let valor = Number(prompt("Quanto você quer enviar? "));
-let hora = Number(prompt("Que horas são? "));
-let limite = 1000;
+// let saldo = Number(prompt("Qual é o seu saldo? "));
+// let valor = Number(prompt("Quanto você quer enviar? "));
+// let hora = Number(prompt("Que horas são? "));
+// let limite = 1000;
 
-// 2. Validação do Limite Noturno (a partir das 20h e valor > 1000)
-if (hora >= 20 && valor > 1000) {
+// // 2. Validação do Limite Noturno (a partir das 20h e valor > 1000)
+// if (hora >= 20 && valor > 1000) {
+//   console.log("Bloqueado: limite noturno");
+// }
+// // 3. Validação do Saldo
+// else if (valor > saldo) {
+//   console.log("Saldo insuficiente");
+// }
+// // 4. Sucesso
+// else {
+//   const novoSaldo = saldo - valor;
+//   console.log(`Pix enviado. Saldo: R$ ${novoSaldo.toFixed(2)}`);
+// }
+
+// 1. Entrada de dados
+const saldo = Number(prompt("Digite o seu saldo:"));
+const valor = Number(prompt("Digite o valor do Pix:"));
+const hora = Number(prompt("Digite a hora atual (0 a 23):"));
+
+// 2. Validação de valor zero ou negativo
+if (valor <= 0) {
+  console.log("Valor inválido");
+}
+// 3. Validação do Limite Noturno (das 20h às 23h OU das 0h às 5h)
+else if ((hora >= 20 || hora < 6) && valor > 1000) {
   console.log("Bloqueado: limite noturno");
 }
-// 3. Validação do Saldo
+// 4. Validação de Saldo Insuficiente
 else if (valor > saldo) {
   console.log("Saldo insuficiente");
 }
-// 4. Sucesso
+// 5. Pix Realizado
 else {
   const novoSaldo = saldo - valor;
   console.log(`Pix enviado. Saldo: R$ ${novoSaldo.toFixed(2)}`);
