@@ -35,7 +35,10 @@ while (jogando) {
     console.log(
       "[VILA] Um velho pescador te entrega uma moeda furada: 'Não vale nada. Guarde mesmo assim.'",
     );
-    if (inventario.includes("moeda furada") === false) {
+    if (
+      inventario.includes("moeda furada") === false &&
+      inventario.includes("corda") === false
+    ) {
       inventario.push("moeda furada");
     }
     console.log("1 - ir para a floresta   2 - ir para o poço");
@@ -77,11 +80,15 @@ while (jogando) {
       local = "vila";
     } else if (escolha === "2") {
       vida = vida + 3;
+      if (vida > 10) {
+        vida = 10;
+      }
       console.log("A água é gelada. Vida: " + vida);
     } else if (escolha === "3" && inventario.includes("moeda furada")) {
       console.log(
         "A moeda cai sem fazer barulho. Uma corda sobe do fundo do poço, sozinha.",
       );
+      inventario.pop("moeda furada");
       inventario.push("corda");
       console.log("Inventário: " + inventario);
     }
@@ -112,3 +119,7 @@ while (jogando) {
     jogando = false;
   }
 }
+//textos nada haver
+//cura infinita
+//não perde moeda
+//não perde corda
